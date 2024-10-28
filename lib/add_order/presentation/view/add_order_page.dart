@@ -10,7 +10,7 @@ class AddOrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AddOrderBloc>(
-      create: (_) => AddOrderBloc(AddOrderState()),
+      create: (_) => AddOrderBloc(const AddOrderInProgress()),
       child: Builder(builder: (context) {
         return const AddOrderView();
       }),

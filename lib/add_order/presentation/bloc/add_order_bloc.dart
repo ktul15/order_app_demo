@@ -9,6 +9,14 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
   }
 
   void _onAddOrderLoaded(AddOrderLoaded event, Emitter emit) async {
-    emit(const AddOrOrderInProgress());
+    emit(const AddOrderInProgress());
+
+    final customers = ["Customer 1", "Customer 2", "Customer 3"];
+
+    emit(
+      AddOrderSuccess(
+        customers: customers,
+      ),
+    );
   }
 }

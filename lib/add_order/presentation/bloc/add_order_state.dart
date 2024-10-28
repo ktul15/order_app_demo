@@ -7,16 +7,18 @@ sealed class AddOrderState extends Equatable {
   List<Object?> get props => [];
 }
 
-class AddOrOrderInProgress extends AddOrderState {
-  const AddOrOrderInProgress();
+class AddOrderInProgress extends AddOrderState {
+  const AddOrderInProgress();
 
   @override
   List<Object?> get props => super.props;
 }
 
-class AddOrOrderSuccess extends AddOrderState {
-  const AddOrOrderSuccess();
+class AddOrderSuccess extends AddOrderState {
+  const AddOrderSuccess({required this.customers});
+
+  final List<String> customers;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [customers];
 }

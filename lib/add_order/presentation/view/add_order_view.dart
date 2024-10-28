@@ -14,9 +14,32 @@ class AddOrderView extends StatelessWidget {
       ),
       body: BlocBuilder<AddOrderBloc, AddOrderState>(
         builder: (context, state) {
-          return const Center(
-            child: Text("Add Order"),
-          );
+          switch (state) {
+            case AddOrderInProgress():
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case AddOrderSuccess():
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    DropdownMenu(
+                      width: MediaQuery.of(context).size.width,
+                      label: const Text("Select Customer"),
+                      dropdownMenuEntries: state.customers.map(
+                        (customer) {
+                          return DropdownMenuEntry(
+                            label: customer,
+                            value: customer,
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ],
+                ),
+              );
+          }
         },
       ),
     );
