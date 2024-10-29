@@ -15,12 +15,16 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
   void _onAddOrderLoaded(AddOrderLoaded event, Emitter emit) async {
     emit(const AddOrderInProgress());
 
-    final customers = await _addOrderRepository.getCustomers();
+    final res = await _addOrderRepository.getCustomers();
 
-    emit(
-      AddOrderSuccess(
-        customers: customers,
-      ),
-    );
+    res.fold((l) {
+      emit(
+        AddOrderSuccess(
+          customers: l,
+        ),
+      );
+    }, (r) {
+      emit(AddOrderFailed(message: r.toString(), customers: []));
+    });
   }
 }

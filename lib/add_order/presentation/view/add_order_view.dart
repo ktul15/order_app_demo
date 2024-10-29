@@ -30,14 +30,18 @@ class AddOrderView extends StatelessWidget {
                       dropdownMenuEntries: state.customers.map(
                         (customer) {
                           return DropdownMenuEntry(
-                            label: customer,
-                            value: customer,
+                            label: customer.name ?? "",
+                            value: customer.accountRef,
                           );
                         },
                       ).toList(),
                     ),
                   ],
                 ),
+              );
+            case AddOrderFailed():
+              return Center(
+                child: Text(state.message),
               );
           }
         },
