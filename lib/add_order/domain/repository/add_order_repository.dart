@@ -19,4 +19,14 @@ class AddOrderRepository {
       return right(r);
     });
   }
+
+  Future<Either<List<String>, Exception>> getCategories() async {
+    final res = await _addOrderRemoteDataSource.getCategories();
+
+    return res.fold((l) {
+      return left(l);
+    }, (r) {
+      return right(r);
+    });
+  }
 }

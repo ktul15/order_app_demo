@@ -17,20 +17,23 @@ class AddOrderInProgress extends AddOrderState {
 }
 
 class AddOrderSuccess extends AddOrderState {
-  const AddOrderSuccess({required this.customers});
+  const AddOrderSuccess({
+    this.customers = const [],
+    this.categories = const [],
+  });
 
   final List<GetCustomersResult> customers;
+  final List<String> categories;
 
   @override
-  List<Object?> get props => [customers];
+  List<Object?> get props => [customers, categories];
 }
 
 class AddOrderFailed extends AddOrderState {
-  const AddOrderFailed({required this.message, required this.customers});
+  const AddOrderFailed({required this.message});
 
-  final List<GetCustomersResult> customers;
   final String message;
 
   @override
-  List<Object?> get props => [customers, message];
+  List<Object?> get props => [message];
 }

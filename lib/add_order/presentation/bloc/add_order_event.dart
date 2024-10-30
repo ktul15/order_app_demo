@@ -1,5 +1,9 @@
 abstract class AddOrderEvent {}
 
-class AddOrderLoaded extends AddOrderEvent {
-  AddOrderLoaded();
+class AddOrderGetCustomersLoaded extends AddOrderEvent {
+  AddOrderGetCustomersLoaded();
+}
+
+class AddOrderGetCategoriesLoaded extends AddOrderEvent {
+  AddOrderGetCategoriesLoaded();
 }

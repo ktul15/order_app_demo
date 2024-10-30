@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_bloc.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_state.dart';
 
@@ -32,6 +33,30 @@ class AddOrderView extends StatelessWidget {
                           return DropdownMenuEntry(
                             label: customer.name ?? "",
                             value: customer.accountRef,
+                          );
+                        },
+                      ).toList(),
+                    ),
+                    DropdownMenu(
+                      width: MediaQuery.of(context).size.width,
+                      label: const Text("Select Category"),
+                      dropdownMenuEntries: state.categories.mapWithIndex(
+                        (category, index) {
+                          return DropdownMenuEntry(
+                            label: category,
+                            value: index,
+                          );
+                        },
+                      ).toList(),
+                    ),
+                    DropdownMenu(
+                      width: MediaQuery.of(context).size.width,
+                      label: const Text("Select Category"),
+                      dropdownMenuEntries: state.categories.mapWithIndex(
+                        (category, index) {
+                          return DropdownMenuEntry(
+                            label: category,
+                            value: index,
                           );
                         },
                       ).toList(),

@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:order_app_demo/add_order/data/models/request/get_categories.dart'
+    as categories_request;
 import 'package:order_app_demo/add_order/data/models/request/get_customers_request.dart';
+import 'package:order_app_demo/add_order/data/models/response/get_categories_response.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
 import 'package:order_app_demo/utils/app_config.dart';
 import 'package:order_app_demo/utils/app_urls.dart';
@@ -51,6 +54,61 @@ class AddOrderRemoteDataSource {
             GetCustomerResponse.fromJson(res?.data);
 
         return left(getCustomerResponse.getCustomersResult ?? []);
+      } else {
+        throw Exception("Something went wrong.");
+      }
+    } on DioException catch (e) {
+      print("fsadf: $e");
+
+      if (e.type == DioExceptionType.connectionError &&
+          e.error is SocketException) {
+        return right(Exception("Please check your internet connection."));
+      }
+      return right(Exception(e.message));
+    } on Exception {
+      return right(
+        Exception(
+          "Something went wrong.",
+        ),
+      );
+    }
+  }
+
+  Future<Either<List<String>, Exception>> getCategories() async {
+    categories_request.GetCategoriesRequest getCategoriesRequest =
+        categories_request.GetCategoriesRequest(
+      appVersionNo: "20240715.14",
+      deviceDate: "/Date(1721035961915+0530)/",
+      user: categories_request.User(
+        userName: "v",
+        password: "v",
+        deviceId: "7f2226495640ecb1",
+        active: true,
+        appType: "Mobile",
+        firstName: "Vinay",
+        id: 3,
+        isResetSync: false,
+        lastName: "Emu",
+        orderCode: "VIE",
+        orderCount: 98,
+        orderPredictionCount: 19,
+        role: "Driver",
+      ),
+    );
+
+    try {
+      final res = await _dio?.post(
+        AppUrl.getCategories,
+        data: getCategoriesRequest.toJson(),
+      );
+      print("res: $res");
+      print("res: ${res?.statusCode}");
+
+      if (res?.statusCode == 200 && res?.data != null) {
+        GetCategoriesResponse getCategoriesResponse =
+            GetCategoriesResponse.fromJson(res?.data);
+
+        return left(getCategoriesResponse.getCategoriesResult ?? []);
       } else {
         throw Exception("Something went wrong.");
       }
