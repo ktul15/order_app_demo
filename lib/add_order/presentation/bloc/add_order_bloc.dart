@@ -8,6 +8,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     _addOrderRepository = addOrderRepository;
     on<AddOrderGetCustomersLoaded>(_onAddOrderGetCustomersLoaded);
     on<AddOrderGetCategoriesLoaded>(_onAddOrderGetCategoriesLoaded);
+    on<AddOrderGetProductsLoaded>(_onAddOrderGetProductsLoaded);
     add(AddOrderGetCustomersLoaded());
   }
 
@@ -45,6 +46,26 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       emit(AddOrderSuccess(
         categories: l,
         customers: prevState != null ? prevState.customers : [],
+      ));
+      add(AddOrderGetProductsLoaded());
+    }, (r) {
+      emit(AddOrderFailed(message: r.toString()));
+    });
+  }
+
+  void _onAddOrderGetProductsLoaded(
+      AddOrderGetProductsLoaded event, Emitter emit) async {
+    final prevState =
+        state.runtimeType == AddOrderSuccess ? state as AddOrderSuccess : null;
+    print("prevState: ${prevState.runtimeType}");
+    emit(const AddOrderInProgress());
+
+    final prodRes = await _addOrderRepository.getProducts();
+    prodRes.fold((l) {
+      emit(AddOrderSuccess(
+        products: l,
+        customers: prevState != null ? prevState.customers : [],
+        categories: prevState != null ? prevState.categories : [],
       ));
     }, (r) {
       emit(AddOrderFailed(message: r.toString()));

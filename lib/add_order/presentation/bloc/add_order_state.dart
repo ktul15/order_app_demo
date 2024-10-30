@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:order_app_demo/add_order/data/models/response/get_products_response.dart';
 
 import '../../data/models/response/get_customer_response.dart';
 
@@ -19,14 +20,16 @@ class AddOrderInProgress extends AddOrderState {
 class AddOrderSuccess extends AddOrderState {
   const AddOrderSuccess({
     this.customers = const [],
+    this.products = const [],
     this.categories = const [],
   });
 
   final List<GetCustomersResult> customers;
+  final List<GetProductsResult> products;
   final List<String> categories;
 
   @override
-  List<Object?> get props => [customers, categories];
+  List<Object?> get props => [customers, categories, products];
 }
 
 class AddOrderFailed extends AddOrderState {

@@ -5,8 +5,11 @@ import 'package:fpdart/fpdart.dart';
 import 'package:order_app_demo/add_order/data/models/request/get_categories.dart'
     as categories_request;
 import 'package:order_app_demo/add_order/data/models/request/get_customers_request.dart';
+import 'package:order_app_demo/add_order/data/models/request/get_products_request.dart'
+    as product_request;
 import 'package:order_app_demo/add_order/data/models/response/get_categories_response.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
+import 'package:order_app_demo/add_order/data/models/response/get_products_response.dart';
 import 'package:order_app_demo/utils/app_config.dart';
 import 'package:order_app_demo/utils/app_urls.dart';
 
@@ -115,6 +118,61 @@ class AddOrderRemoteDataSource {
     } on DioException catch (e) {
       print("fsadf: $e");
 
+      if (e.type == DioExceptionType.connectionError &&
+          e.error is SocketException) {
+        return right(Exception("Please check your internet connection."));
+      }
+      return right(Exception(e.message));
+    } on Exception {
+      return right(
+        Exception(
+          "Something went wrong.",
+        ),
+      );
+    }
+  }
+
+  Future<Either<List<GetProductsResult>, Exception>> getProducts() async {
+    product_request.GetProductsRequest getProductsRequest =
+        product_request.GetProductsRequest(
+      syncDate: "/Date(536436000-600)/",
+      pageIndex: 0,
+      appVersionNo: "1.0",
+      deviceDate: "/Date(1720768210-600)/",
+      user: product_request.User(
+        userName: "v",
+        password: "v",
+        deviceId: "7f2226495640ecb1",
+        active: true,
+        appType: "Mobile",
+        firstName: "Vinay",
+        id: 3,
+        isResetSync: false,
+        lastName: "Emu",
+        orderCode: "VIE",
+        orderCount: 98,
+        orderPredictionCount: 19,
+        role: "Driver",
+      ),
+    );
+
+    try {
+      final res = await _dio?.post(
+        AppUrl.getProducts,
+        data: getProductsRequest.toJson(),
+      );
+      print("res: $res");
+      print("res: ${res?.statusCode}");
+
+      if (res?.statusCode == 200 && res?.data != null) {
+        GetProductsResponse getProductsResponse =
+            GetProductsResponse.fromJson(res?.data);
+
+        return left(getProductsResponse.getProductsResult ?? []);
+      } else {
+        throw Exception("Something went wrong.");
+      }
+    } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionError &&
           e.error is SocketException) {
         return right(Exception("Please check your internet connection."));

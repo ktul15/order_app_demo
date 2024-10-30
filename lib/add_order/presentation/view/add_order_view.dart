@@ -27,6 +27,7 @@ class AddOrderView extends StatelessWidget {
                   children: [
                     DropdownMenu(
                       width: MediaQuery.of(context).size.width,
+                      menuHeight: MediaQuery.of(context).size.height * 0.5,
                       label: const Text("Select Customer"),
                       dropdownMenuEntries: state.customers.map(
                         (customer) {
@@ -39,6 +40,7 @@ class AddOrderView extends StatelessWidget {
                     ),
                     DropdownMenu(
                       width: MediaQuery.of(context).size.width,
+                      menuHeight: MediaQuery.of(context).size.height * 0.5,
                       label: const Text("Select Category"),
                       dropdownMenuEntries: state.categories.mapWithIndex(
                         (category, index) {
@@ -51,11 +53,12 @@ class AddOrderView extends StatelessWidget {
                     ),
                     DropdownMenu(
                       width: MediaQuery.of(context).size.width,
-                      label: const Text("Select Category"),
-                      dropdownMenuEntries: state.categories.mapWithIndex(
-                        (category, index) {
+                      menuHeight: MediaQuery.of(context).size.height * 0.5,
+                      label: const Text("Select Product"),
+                      dropdownMenuEntries: state.products.mapWithIndex(
+                        (product, index) {
                           return DropdownMenuEntry(
-                            label: category,
+                            label: product.name ?? "",
                             value: index,
                           );
                         },

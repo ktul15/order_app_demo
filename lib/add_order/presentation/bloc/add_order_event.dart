@@ -7,3 +7,7 @@ class AddOrderGetCustomersLoaded extends AddOrderEvent {
 class AddOrderGetCategoriesLoaded extends AddOrderEvent {
   AddOrderGetCategoriesLoaded();
 }
+
+class AddOrderGetProductsLoaded extends AddOrderEvent {
+  AddOrderGetProductsLoaded();
+}
