@@ -1,15 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'get_categories_response.g.dart';
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class GetCategoriesResponse {
+  @JsonKey(name: "GetCategoriesResult")
   List<String>? getCategoriesResult;
 
   GetCategoriesResponse({this.getCategoriesResult});
 
-  GetCategoriesResponse.fromJson(Map<String, dynamic> json) {
-    getCategoriesResult = json['GetCategoriesResult'].cast<String>();
-  }
+  factory GetCategoriesResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetCategoriesResponseFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['GetCategoriesResult'] = getCategoriesResult;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$GetCategoriesResponseToJson(this);
 }

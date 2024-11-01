@@ -56,6 +56,9 @@ class AddOrderRemoteDataSource {
         GetCustomerResponse getCustomerResponse =
             GetCustomerResponse.fromJson(res?.data);
 
+        print(
+            "getCustomerResponse.getCustomersResult: ${getCustomerResponse.getCustomersResult}");
+
         return left(getCustomerResponse.getCustomersResult ?? []);
       } else {
         throw Exception("Something went wrong.");
@@ -104,8 +107,6 @@ class AddOrderRemoteDataSource {
         AppUrl.getCategories,
         data: getCategoriesRequest.toJson(),
       );
-      print("res: $res");
-      print("res: ${res?.statusCode}");
 
       if (res?.statusCode == 200 && res?.data != null) {
         GetCategoriesResponse getCategoriesResponse =
@@ -116,8 +117,6 @@ class AddOrderRemoteDataSource {
         throw Exception("Something went wrong.");
       }
     } on DioException catch (e) {
-      print("fsadf: $e");
-
       if (e.type == DioExceptionType.connectionError &&
           e.error is SocketException) {
         return right(Exception("Please check your internet connection."));

@@ -27,7 +27,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
 
     final custRes = await _addOrderRepository.getCustomers();
     custRes.fold((l) async {
-      emit((state as AddOrderState).copyWith(
+      emit(state.copyWith(
         isLoading: false,
         customers: l,
       ));

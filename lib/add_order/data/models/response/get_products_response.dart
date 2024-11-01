@@ -1,92 +1,44 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'get_products_response.g.dart';
+
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class GetProductsResponse {
+  @JsonKey(name: "GetProductsResult")
   List<GetProductsResult>? getProductsResult;
 
   GetProductsResponse({this.getProductsResult});
 
-  GetProductsResponse.fromJson(Map<String, dynamic> json) {
-    if (json['GetProductsResult'] != null) {
-      getProductsResult = <GetProductsResult>[];
-      json['GetProductsResult'].forEach((v) {
-        getProductsResult!.add(new GetProductsResult.fromJson(v));
-      });
-    }
-  }
+  factory GetProductsResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetProductsResponseFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.getProductsResult != null) {
-      data['GetProductsResult'] =
-          this.getProductsResult!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$GetProductsResponseToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class GetProductsResult {
-  String? barCode;
-  String? createdDate;
-  bool? deleted;
+  @JsonKey(name: "Id")
   int? id;
-  bool? isSpecialOfferSelected;
-  bool? isWeight;
-  String? modifiedDate;
+  @JsonKey(name: "Name")
   String? name;
-  String? nominalCode;
-  int? packSize;
+  @JsonKey(name: "Price")
   double? price;
+  @JsonKey(name: "ProductCategory")
   String? productCategory;
+  @JsonKey(name: "ProductCode")
   String? productCode;
+  @JsonKey(name: "ProductVatId")
   int? productVatId;
 
   GetProductsResult(
-      {this.barCode,
-      this.createdDate,
-      this.deleted,
-      this.id,
-      this.isSpecialOfferSelected,
-      this.isWeight,
-      this.modifiedDate,
+      {this.id,
       this.name,
-      this.nominalCode,
-      this.packSize,
       this.price,
       this.productCategory,
       this.productCode,
       this.productVatId});
 
-  GetProductsResult.fromJson(Map<String, dynamic> json) {
-    barCode = json['BarCode'];
-    createdDate = json['CreatedDate'];
-    deleted = json['Deleted'];
-    id = json['Id'];
-    isSpecialOfferSelected = json['IsSpecialOfferSelected'];
-    isWeight = json['IsWeight'];
-    modifiedDate = json['ModifiedDate'];
-    name = json['Name'];
-    nominalCode = json['NominalCode'];
-    packSize = json['PackSize'];
-    price = json['Price'];
-    productCategory = json['ProductCategory'];
-    productCode = json['ProductCode'];
-    productVatId = json['ProductVatId'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['BarCode'] = this.barCode;
-    data['CreatedDate'] = this.createdDate;
-    data['Deleted'] = this.deleted;
-    data['Id'] = this.id;
-    data['IsSpecialOfferSelected'] = this.isSpecialOfferSelected;
-    data['IsWeight'] = this.isWeight;
-    data['ModifiedDate'] = this.modifiedDate;
-    data['Name'] = this.name;
-    data['NominalCode'] = this.nominalCode;
-    data['PackSize'] = this.packSize;
-    data['Price'] = this.price;
-    data['ProductCategory'] = this.productCategory;
-    data['ProductCode'] = this.productCode;
-    data['ProductVatId'] = this.productVatId;
-    return data;
-  }
+  factory GetProductsResult.fromJson(Map<String, dynamic> json) =>
+      _$GetProductsResultFromJson(json);
+  Map<String, dynamic> toJson() => _$GetProductsResultToJson(this);
 }
