@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:order_app_demo/add_order/data/local_data_source/add_order_local_data_source.dart';
 import 'package:order_app_demo/add_order/data/remote_data_source/add_order_remote_data_source.dart';
 import 'package:order_app_demo/add_order/domain/repository/add_order_repository.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_bloc.dart';
@@ -17,7 +18,10 @@ class AddOrderPage extends StatelessWidget {
             "",
             isLoading: true,
           ),
-          AddOrderRepository(AddOrderRemoteDataSource())),
+          AddOrderRepository(
+            AddOrderRemoteDataSource(),
+            const AddOrderLocalDataSource(),
+          )),
       child: Builder(builder: (context) {
         return AddOrderView();
       }),

@@ -25,6 +25,7 @@ class AddOrderRemoteDataSource {
   Dio? _dio;
 
   Future<Either<List<GetCustomersResult>, Exception>> getCustomers() async {
+    print("getting customers from network");
     GetCustomerRequest getCustomerRequest = GetCustomerRequest(
       user: User(
         userName: "v",
@@ -80,7 +81,9 @@ class AddOrderRemoteDataSource {
     }
   }
 
-  Future<Either<List<String>, Exception>> getCategories() async {
+  Future<Either<GetCategoriesResponse, Exception>> getCategories() async {
+    print("getting categories from network");
+
     categories_request.GetCategoriesRequest getCategoriesRequest =
         categories_request.GetCategoriesRequest(
       appVersionNo: "20240715.14",
@@ -112,7 +115,7 @@ class AddOrderRemoteDataSource {
         GetCategoriesResponse getCategoriesResponse =
             GetCategoriesResponse.fromJson(res?.data);
 
-        return left(getCategoriesResponse.getCategoriesResult ?? []);
+        return left(getCategoriesResponse);
       } else {
         throw Exception("Something went wrong.");
       }
@@ -132,6 +135,7 @@ class AddOrderRemoteDataSource {
   }
 
   Future<Either<List<GetProductsResult>, Exception>> getProducts() async {
+    print("getting products from network");
     product_request.GetProductsRequest getProductsRequest =
         product_request.GetProductsRequest(
       syncDate: "/Date(536436000-600)/",

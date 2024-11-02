@@ -18,7 +18,8 @@ class GetProductsResponse {
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class GetProductsResult {
   @JsonKey(name: "Id")
-  int? id;
+  @IntToStringConverter()
+  String id;
   @JsonKey(name: "Name")
   String? name;
   @JsonKey(name: "Price")
@@ -31,7 +32,7 @@ class GetProductsResult {
   int? productVatId;
 
   GetProductsResult(
-      {this.id,
+      {required this.id,
       this.name,
       this.price,
       this.productCategory,
@@ -41,4 +42,24 @@ class GetProductsResult {
   factory GetProductsResult.fromJson(Map<String, dynamic> json) =>
       _$GetProductsResultFromJson(json);
   Map<String, dynamic> toJson() => _$GetProductsResultToJson(this);
+}
+
+class IntToStringConverter implements JsonConverter<String, int> {
+  const IntToStringConverter();
+
+  @override
+  String fromJson(int json) => '$json';
+
+  @override
+  int toJson(String object) => int.parse(object);
+}
+
+class IntToNullableStringConverter implements JsonConverter<String?, int> {
+  const IntToNullableStringConverter();
+
+  @override
+  String? fromJson(int json) => '$json';
+
+  @override
+  int toJson(String? object) => int.parse(object ?? "0");
 }

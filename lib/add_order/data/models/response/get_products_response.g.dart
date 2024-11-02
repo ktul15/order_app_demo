@@ -29,7 +29,7 @@ Map<String, dynamic> _$GetProductsResponseToJson(GetProductsResponse instance) {
 
 GetProductsResult _$GetProductsResultFromJson(Map<String, dynamic> json) =>
     GetProductsResult(
-      id: (json['Id'] as num?)?.toInt(),
+      id: const IntToStringConverter().fromJson((json['Id'] as num).toInt()),
       name: json['Name'] as String?,
       price: (json['Price'] as num?)?.toDouble(),
       productCategory: json['ProductCategory'] as String?,
@@ -38,7 +38,9 @@ GetProductsResult _$GetProductsResultFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GetProductsResultToJson(GetProductsResult instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'Id': const IntToStringConverter().toJson(instance.id),
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -46,7 +48,6 @@ Map<String, dynamic> _$GetProductsResultToJson(GetProductsResult instance) {
     }
   }
 
-  writeNotNull('Id', instance.id);
   writeNotNull('Name', instance.name);
   writeNotNull('Price', instance.price);
   writeNotNull('ProductCategory', instance.productCategory);
