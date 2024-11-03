@@ -16,6 +16,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     on<ProductSelected>(_onProductSelected);
     on<QuantityChanged>(_onQuantityChanged);
     on<UnitAdded>(_onUnitAdded);
+    on<QuantitySubtracted>(_onQuantitySubtracted);
     add(AddOrderGetCustomersLoaded());
   }
 
@@ -125,6 +126,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     }
 
     final newUnit = ProductUnit(
+      index: state.unitsAdded.length,
       customer: state.selectedCustomer!,
       product: state.selectedProduct!,
       category: state.selectedCategory!,
@@ -144,12 +146,12 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     print("isAlreadyExists: $isAlreadyExists");
 
     if (isAlreadyExists) {
-      final updatedUnits = state.unitsAdded.mapWithIndex((prod, index) {
+      final updatedUnits = state.unitsAdded.map((prod) {
         if (prod.product.name == state.selectedProduct?.name &&
             prod.category == state.selectedCategory &&
             prod.customer == state.selectedCustomer) {
-          print("sadf");
           return ProductUnit(
+            index: prod.index,
             customer: prod.customer,
             product: prod.product,
             category: prod.category,
@@ -167,6 +169,39 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       final unitsAdded = [...state.unitsAdded, newUnit];
 
       emit(state.copyWith(unitsAdded: unitsAdded, isLoading: false));
+    }
+  }
+
+  void _onQuantitySubtracted(QuantitySubtracted event, Emitter emit) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
+
+    if (state.unitsAdded[event.index].quantity == 1) {
+      List<ProductUnit> updatedUnits = [];
+      state.unitsAdded.asMap().filterWithIndex((unit, index) {
+        if (index != event.index) {
+          updatedUnits.add(unit);
+          return true;
+        }
+        return false;
+      });
+      emit(state.copyWith(unitsAdded: updatedUnits, isLoading: false));
+    } else {
+      final updatedUnits = state.unitsAdded.mapWithIndex((unit, index) {
+        if (index == event.index) {
+          return unit.copyWith(quantity: unit.quantity - 1);
+        } else {
+          return unit;
+        }
+      }).toList();
+
+      emit(state.copyWith(
+        unitsAdded: updatedUnits,
+        isLoading: false,
+      ));
     }
   }
 }

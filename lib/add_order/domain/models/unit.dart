@@ -7,6 +7,7 @@ part 'unit.freezed.dart';
 @freezed
 class ProductUnit with _$ProductUnit {
   const factory ProductUnit({
+    required int index,
     required GetCustomersResult customer,
     required GetProductsResult product,
     required String category,

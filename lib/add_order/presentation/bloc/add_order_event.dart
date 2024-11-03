@@ -42,3 +42,8 @@ class UnitAdded extends AddOrderEvent {
   // final String category;
   final String quantity;
 }
+
+class QuantitySubtracted extends AddOrderEvent {
+  QuantitySubtracted({required this.index});
+  final int index;
+}

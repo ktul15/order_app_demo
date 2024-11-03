@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/fpdart.dart' as fpdart;
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_bloc.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_state.dart';
 
 import '../bloc/add_order_event.dart';
 
-class AddOrderView extends StatelessWidget {
+class AddOrderView extends StatefulWidget {
   AddOrderView({super.key});
 
+  @override
+  State<AddOrderView> createState() => _AddOrderViewState();
+}
+
+class _AddOrderViewState extends State<AddOrderView> {
   final formKey = GlobalKey<FormState>();
+
   final quantityController = TextEditingController();
+
+  bool showSubtract = false;
 
   @override
   Widget build(BuildContext context) {
@@ -163,6 +171,17 @@ class AddOrderView extends StatelessWidget {
                                     "Add",
                                   ),
                                 ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // toggle the visibility of subtract icon
+                                    setState(() {
+                                      showSubtract = !showSubtract;
+                                    });
+                                  },
+                                  child: const Text(
+                                    "Sub",
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -201,13 +220,36 @@ class AddOrderView extends StatelessWidget {
                               final quantity = state.unitsAdded[index].quantity;
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 8),
+                                    horizontal: 20, vertical: 16),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(name ?? ""),
+                                    Expanded(child: Container()),
                                     Text(quantity.toString()),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    showSubtract == true
+                                        ? InkWell(
+                                            onTap: () {
+                                              context.read<AddOrderBloc>().add(
+                                                    QuantitySubtracted(
+                                                      index: index,
+                                                    ),
+                                                  );
+                                            },
+                                            child: const Icon(
+                                              Icons.remove,
+                                              size: 16,
+                                            ),
+                                          )
+                                        : Container(
+                                            padding: EdgeInsets.zero,
+                                            height: 0,
+                                            width: 0,
+                                          ),
                                   ],
                                 ),
                               );

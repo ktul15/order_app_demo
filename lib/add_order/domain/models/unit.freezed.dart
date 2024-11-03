@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProductUnit {
+  int get index => throw _privateConstructorUsedError;
   GetCustomersResult get customer => throw _privateConstructorUsedError;
   GetProductsResult get product => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $ProductUnitCopyWith<$Res> {
       _$ProductUnitCopyWithImpl<$Res, ProductUnit>;
   @useResult
   $Res call(
-      {GetCustomersResult customer,
+      {int index,
+      GetCustomersResult customer,
       GetProductsResult product,
       String category,
       int quantity});
@@ -56,12 +58,17 @@ class _$ProductUnitCopyWithImpl<$Res, $Val extends ProductUnit>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? customer = null,
     Object? product = null,
     Object? category = null,
     Object? quantity = null,
   }) {
     return _then(_value.copyWith(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       customer: null == customer
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
@@ -91,7 +98,8 @@ abstract class _$$ProductUnitImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {GetCustomersResult customer,
+      {int index,
+      GetCustomersResult customer,
       GetProductsResult product,
       String category,
       int quantity});
@@ -110,12 +118,17 @@ class __$$ProductUnitImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? index = null,
     Object? customer = null,
     Object? product = null,
     Object? category = null,
     Object? quantity = null,
   }) {
     return _then(_$ProductUnitImpl(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       customer: null == customer
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
@@ -140,11 +153,14 @@ class __$$ProductUnitImplCopyWithImpl<$Res>
 
 class _$ProductUnitImpl implements _ProductUnit {
   const _$ProductUnitImpl(
-      {required this.customer,
+      {required this.index,
+      required this.customer,
       required this.product,
       required this.category,
       required this.quantity});
 
+  @override
+  final int index;
   @override
   final GetCustomersResult customer;
   @override
@@ -156,7 +172,7 @@ class _$ProductUnitImpl implements _ProductUnit {
 
   @override
   String toString() {
-    return 'ProductUnit(customer: $customer, product: $product, category: $category, quantity: $quantity)';
+    return 'ProductUnit(index: $index, customer: $customer, product: $product, category: $category, quantity: $quantity)';
   }
 
   @override
@@ -164,6 +180,7 @@ class _$ProductUnitImpl implements _ProductUnit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductUnitImpl &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.customer, customer) ||
                 other.customer == customer) &&
             (identical(other.product, product) || other.product == product) &&
@@ -175,7 +192,7 @@ class _$ProductUnitImpl implements _ProductUnit {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, customer, product, category, quantity);
+      Object.hash(runtimeType, index, customer, product, category, quantity);
 
   /// Create a copy of ProductUnit
   /// with the given fields replaced by the non-null parameter values.
@@ -188,11 +205,14 @@ class _$ProductUnitImpl implements _ProductUnit {
 
 abstract class _ProductUnit implements ProductUnit {
   const factory _ProductUnit(
-      {required final GetCustomersResult customer,
+      {required final int index,
+      required final GetCustomersResult customer,
       required final GetProductsResult product,
       required final String category,
       required final int quantity}) = _$ProductUnitImpl;
 
+  @override
+  int get index;
   @override
   GetCustomersResult get customer;
   @override
