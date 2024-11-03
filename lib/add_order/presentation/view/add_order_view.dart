@@ -19,6 +19,7 @@ class _AddOrderViewState extends State<AddOrderView> {
   final quantityController = TextEditingController();
 
   bool showSubtract = false;
+  bool showRemove = false;
 
   @override
   Widget build(BuildContext context) {
@@ -182,6 +183,17 @@ class _AddOrderViewState extends State<AddOrderView> {
                                     "Sub",
                                   ),
                                 ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // toggle the visibility of subtract icon
+                                    setState(() {
+                                      showRemove = !showRemove;
+                                    });
+                                  },
+                                  child: const Text(
+                                    "Rem",
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -242,6 +254,25 @@ class _AddOrderViewState extends State<AddOrderView> {
                                             },
                                             child: const Icon(
                                               Icons.remove,
+                                              size: 16,
+                                            ),
+                                          )
+                                        : Container(
+                                            padding: EdgeInsets.zero,
+                                            height: 0,
+                                            width: 0,
+                                          ),
+                                    showRemove == true
+                                        ? InkWell(
+                                            onTap: () {
+                                              context.read<AddOrderBloc>().add(
+                                                    UnitRemoved(
+                                                      index: index,
+                                                    ),
+                                                  );
+                                            },
+                                            child: const Icon(
+                                              Icons.close,
                                               size: 16,
                                             ),
                                           )

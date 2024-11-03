@@ -47,3 +47,8 @@ class QuantitySubtracted extends AddOrderEvent {
   QuantitySubtracted({required this.index});
   final int index;
 }
+
+class UnitRemoved extends AddOrderEvent {
+  UnitRemoved({required this.index});
+  final int index;
+}

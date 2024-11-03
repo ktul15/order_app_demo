@@ -17,6 +17,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     on<QuantityChanged>(_onQuantityChanged);
     on<UnitAdded>(_onUnitAdded);
     on<QuantitySubtracted>(_onQuantitySubtracted);
+    on<UnitRemoved>(_onUnitRemoved);
     add(AddOrderGetCustomersLoaded());
   }
 
@@ -203,5 +204,23 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
         isLoading: false,
       ));
     }
+  }
+
+  void _onUnitRemoved(UnitRemoved event, Emitter emit) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
+
+    List<ProductUnit> updatedUnits = [];
+    state.unitsAdded.asMap().filterWithIndex((unit, index) {
+      if (index != event.index) {
+        updatedUnits.add(unit);
+        return true;
+      }
+      return false;
+    });
+    emit(state.copyWith(unitsAdded: updatedUnits, isLoading: false));
   }
 }
