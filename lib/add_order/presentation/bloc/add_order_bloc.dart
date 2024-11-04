@@ -68,6 +68,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
 
     final prodRes = await _addOrderRepository.getProducts();
     prodRes.fold((l) {
+      print("prodRes: ${l.first.price}");
       emit(state.copyWith(
         isLoading: false,
         products: l,
@@ -111,6 +112,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     ));
 
     int? quantity = int.tryParse(event.quantity);
+    print("price: ${state.selectedProduct?.price}");
 
     if (state.selectedCustomer == null ||
         state.selectedProduct == null ||

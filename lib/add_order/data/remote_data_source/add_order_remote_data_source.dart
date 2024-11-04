@@ -170,6 +170,8 @@ class AddOrderRemoteDataSource {
       if (res?.statusCode == 200 && res?.data != null) {
         GetProductsResponse getProductsResponse =
             GetProductsResponse.fromJson(res?.data);
+        print("er: ${getProductsResponse.getProductsResult?.first.name}");
+        print("er: ${getProductsResponse.getProductsResult?.first.price}");
 
         return left(getProductsResponse.getProductsResult ?? []);
       } else {

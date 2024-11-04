@@ -27,7 +27,7 @@ void main() async {
         'CREATE TABLE ${Constants.customers_db_table}(AccountRef TEXT PRIMARY KEY, Name TEXT, DiscountPercentage REAL)',
       );
       await db.execute(
-        'CREATE TABLE ${Constants.products_db_table}(Id INT PRIMARY KEY, Name TEXT, PRICE REAL, ProductCategory TEXT, ProductCode TEXT, ProductVatId INT)',
+        'CREATE TABLE ${Constants.products_db_table}(Id INT PRIMARY KEY, Name TEXT, Price REAL, ProductCategory TEXT, ProductCode TEXT, ProductVatId INT)',
       );
       return;
     },

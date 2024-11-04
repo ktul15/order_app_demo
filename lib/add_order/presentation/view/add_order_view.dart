@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart' as fpdart;
+import 'package:go_router/go_router.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_bloc.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_state.dart';
+import 'package:order_app_demo/router/path_constants.dart';
 
 import '../bloc/add_order_event.dart';
 
@@ -107,7 +109,6 @@ class _AddOrderViewState extends State<AddOrderView> {
                               },
                             ),
                             DropdownButtonFormField<String>(
-                              // width: MediaQuery.of(context).size.width,
                               menuMaxHeight:
                                   MediaQuery.of(context).size.height * 0.5,
                               elevation: 100,
@@ -124,7 +125,7 @@ class _AddOrderViewState extends State<AddOrderView> {
                               ).toList(),
                               onChanged: (value) {
                                 if (value != null) {
-                                  print(value);
+                                  print("value: ${state.products}");
                                   context.read<AddOrderBloc>().add(
                                       ProductSelected(
                                           selectedProduct: state.products
@@ -161,6 +162,8 @@ class _AddOrderViewState extends State<AddOrderView> {
                                   onPressed: () {
                                     if (formKey.currentState?.validate() ==
                                         true) {
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
                                       // add unit event
                                       context.read<AddOrderBloc>().add(
                                           UnitAdded(
@@ -287,6 +290,18 @@ class _AddOrderViewState extends State<AddOrderView> {
                             },
                           ),
                         ),
+                        state.unitsAdded.isNotEmpty
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  context.pushNamed(PathConstants.orderDetails,
+                                      extra: {
+                                        "customer": state.selectedCustomer,
+                                        "units": state.unitsAdded,
+                                      });
+                                },
+                                child: const Text("View Order Details"),
+                              )
+                            : Container(),
                       ],
                     )
                   ],
