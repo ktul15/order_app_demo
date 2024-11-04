@@ -18,6 +18,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
     on<UnitAdded>(_onUnitAdded);
     on<QuantitySubtracted>(_onQuantitySubtracted);
     on<UnitRemoved>(_onUnitRemoved);
+    on<SignatureImageAdded>(_onSignatureImageAdded);
     add(AddOrderGetCustomersLoaded());
   }
 
@@ -224,5 +225,13 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       return false;
     });
     emit(state.copyWith(unitsAdded: updatedUnits, isLoading: false));
+  }
+
+  void _onSignatureImageAdded(SignatureImageAdded event, Emitter emit) async {
+    emit(
+      state.copyWith(
+        bytes: event.bytes,
+      ),
+    );
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../data/models/response/get_customer_response.dart';
@@ -19,6 +22,7 @@ class AddOrderState with _$AddOrderState {
     GetProductsResult? selectedProduct,
     @Default(0) int quantity,
     @Default([]) List<ProductUnit> unitsAdded,
+    Uint8List? bytes,
   }) = _AddOrderState;
 
   // final bool isLoading;

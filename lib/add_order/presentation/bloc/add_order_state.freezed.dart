@@ -27,6 +27,7 @@ mixin _$AddOrderState {
   GetProductsResult? get selectedProduct => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   List<ProductUnit> get unitsAdded => throw _privateConstructorUsedError;
+  Uint8List? get bytes => throw _privateConstructorUsedError;
 
   /// Create a copy of AddOrderState
   /// with the given fields replaced by the non-null parameter values.
@@ -51,7 +52,8 @@ abstract class $AddOrderStateCopyWith<$Res> {
       GetCustomersResult? selectedCustomer,
       GetProductsResult? selectedProduct,
       int quantity,
-      List<ProductUnit> unitsAdded});
+      List<ProductUnit> unitsAdded,
+      Uint8List? bytes});
 }
 
 /// @nodoc
@@ -79,6 +81,7 @@ class _$AddOrderStateCopyWithImpl<$Res, $Val extends AddOrderState>
     Object? selectedProduct = freezed,
     Object? quantity = null,
     Object? unitsAdded = null,
+    Object? bytes = freezed,
   }) {
     return _then(_value.copyWith(
       error: null == error
@@ -121,6 +124,10 @@ class _$AddOrderStateCopyWithImpl<$Res, $Val extends AddOrderState>
           ? _value.unitsAdded
           : unitsAdded // ignore: cast_nullable_to_non_nullable
               as List<ProductUnit>,
+      bytes: freezed == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ) as $Val);
   }
 }
@@ -143,7 +150,8 @@ abstract class _$$AddOrderStateImplCopyWith<$Res>
       GetCustomersResult? selectedCustomer,
       GetProductsResult? selectedProduct,
       int quantity,
-      List<ProductUnit> unitsAdded});
+      List<ProductUnit> unitsAdded,
+      Uint8List? bytes});
 }
 
 /// @nodoc
@@ -169,6 +177,7 @@ class __$$AddOrderStateImplCopyWithImpl<$Res>
     Object? selectedProduct = freezed,
     Object? quantity = null,
     Object? unitsAdded = null,
+    Object? bytes = freezed,
   }) {
     return _then(_$AddOrderStateImpl(
       null == error
@@ -211,6 +220,10 @@ class __$$AddOrderStateImplCopyWithImpl<$Res>
           ? _value._unitsAdded
           : unitsAdded // ignore: cast_nullable_to_non_nullable
               as List<ProductUnit>,
+      bytes: freezed == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 }
@@ -227,7 +240,8 @@ class _$AddOrderStateImpl implements _AddOrderState {
       this.selectedCustomer,
       this.selectedProduct,
       this.quantity = 0,
-      final List<ProductUnit> unitsAdded = const []})
+      final List<ProductUnit> unitsAdded = const [],
+      this.bytes})
       : _customers = customers,
         _products = products,
         _categories = categories,
@@ -283,8 +297,11 @@ class _$AddOrderStateImpl implements _AddOrderState {
   }
 
   @override
+  final Uint8List? bytes;
+
+  @override
   String toString() {
-    return 'AddOrderState(error: $error, isLoading: $isLoading, customers: $customers, products: $products, categories: $categories, selectedCategory: $selectedCategory, selectedCustomer: $selectedCustomer, selectedProduct: $selectedProduct, quantity: $quantity, unitsAdded: $unitsAdded)';
+    return 'AddOrderState(error: $error, isLoading: $isLoading, customers: $customers, products: $products, categories: $categories, selectedCategory: $selectedCategory, selectedCustomer: $selectedCustomer, selectedProduct: $selectedProduct, quantity: $quantity, unitsAdded: $unitsAdded, bytes: $bytes)';
   }
 
   @override
@@ -309,7 +326,8 @@ class _$AddOrderStateImpl implements _AddOrderState {
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             const DeepCollectionEquality()
-                .equals(other._unitsAdded, _unitsAdded));
+                .equals(other._unitsAdded, _unitsAdded) &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
   }
 
   @override
@@ -324,7 +342,8 @@ class _$AddOrderStateImpl implements _AddOrderState {
       selectedCustomer,
       selectedProduct,
       quantity,
-      const DeepCollectionEquality().hash(_unitsAdded));
+      const DeepCollectionEquality().hash(_unitsAdded),
+      const DeepCollectionEquality().hash(bytes));
 
   /// Create a copy of AddOrderState
   /// with the given fields replaced by the non-null parameter values.
@@ -345,7 +364,8 @@ abstract class _AddOrderState implements AddOrderState {
       final GetCustomersResult? selectedCustomer,
       final GetProductsResult? selectedProduct,
       final int quantity,
-      final List<ProductUnit> unitsAdded}) = _$AddOrderStateImpl;
+      final List<ProductUnit> unitsAdded,
+      final Uint8List? bytes}) = _$AddOrderStateImpl;
 
   @override
   String get error;
@@ -367,6 +387,8 @@ abstract class _AddOrderState implements AddOrderState {
   int get quantity;
   @override
   List<ProductUnit> get unitsAdded;
+  @override
+  Uint8List? get bytes;
 
   /// Create a copy of AddOrderState
   /// with the given fields replaced by the non-null parameter values.

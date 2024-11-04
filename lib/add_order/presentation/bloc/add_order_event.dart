@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_products_response.dart';
 
@@ -51,4 +53,9 @@ class QuantitySubtracted extends AddOrderEvent {
 class UnitRemoved extends AddOrderEvent {
   UnitRemoved({required this.index});
   final int index;
+}
+
+class SignatureImageAdded extends AddOrderEvent {
+  SignatureImageAdded({required this.bytes});
+  final Uint8List bytes;
 }
