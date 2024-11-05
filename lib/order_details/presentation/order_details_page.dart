@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
 import 'package:order_app_demo/add_order/domain/models/unit.dart';
+import 'package:order_app_demo/utils/app_colors.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   const OrderDetailsPage(
@@ -19,11 +20,11 @@ class OrderDetailsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           child: Column(
             children: [
               Container(
-                color: Colors.red.shade100,
+                color: AppColor.primaryColor,
                 width: MediaQuery.of(context).size.width,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
