@@ -25,7 +25,6 @@ class AddOrderRemoteDataSource {
   Dio? _dio;
 
   Future<Either<List<GetCustomersResult>, Exception>> getCustomers() async {
-    print("getting customers from network");
     GetCustomerRequest getCustomerRequest = GetCustomerRequest(
       user: User(
         userName: "v",
@@ -50,23 +49,16 @@ class AddOrderRemoteDataSource {
     try {
       final res = await _dio?.post(AppUrl.getCustomers,
           data: getCustomerRequest.toJson());
-      print("res: $res");
-      print("res: ${res?.statusCode}");
 
       if (res?.statusCode == 200 && res?.data != null) {
         GetCustomerResponse getCustomerResponse =
             GetCustomerResponse.fromJson(res?.data);
-
-        print(
-            "getCustomerResponse.getCustomersResult: ${getCustomerResponse.getCustomersResult}");
 
         return left(getCustomerResponse.getCustomersResult ?? []);
       } else {
         throw Exception("Something went wrong.");
       }
     } on DioException catch (e) {
-      print("fsadf: $e");
-
       if (e.type == DioExceptionType.connectionError &&
           e.error is SocketException) {
         return right(Exception("Please check your internet connection."));
@@ -82,8 +74,6 @@ class AddOrderRemoteDataSource {
   }
 
   Future<Either<GetCategoriesResponse, Exception>> getCategories() async {
-    print("getting categories from network");
-
     categories_request.GetCategoriesRequest getCategoriesRequest =
         categories_request.GetCategoriesRequest(
       appVersionNo: "20240715.14",

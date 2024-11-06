@@ -14,14 +14,15 @@ class AddOrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<AddOrderBloc>(
       create: (_) => AddOrderBloc(
-          const AddOrderState(
-            "",
-            isLoading: true,
-          ),
-          AddOrderRepository(
-            AddOrderRemoteDataSource(),
-            const AddOrderLocalDataSource(),
-          )),
+        const AddOrderState(
+          "",
+          isLoading: true,
+        ),
+        AddOrderRepository(
+          AddOrderRemoteDataSource(),
+          AddOrderLocalDataSource(),
+        ),
+      ),
       child: Builder(builder: (context) {
         return AddOrderView();
       }),

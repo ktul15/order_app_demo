@@ -53,6 +53,7 @@ class AddOrderRepository {
   Future<Either<List<GetProductsResult>, Exception>> getProducts() async {
     final productsListFromLocalDB =
         await _addOrderLocalDataSource.getProducts();
+    print("productsListFromLocalDB: ${productsListFromLocalDB.length}");
     if (productsListFromLocalDB.isEmpty) {
       final res = await _addOrderRemoteDataSource.getProducts();
 

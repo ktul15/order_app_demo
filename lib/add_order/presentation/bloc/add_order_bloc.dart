@@ -34,6 +34,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       emit(state.copyWith(
         isLoading: false,
         customers: l,
+        error: "",
       ));
       add(AddOrderGetCategoriesLoaded());
     }, (r) {
@@ -53,6 +54,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       emit(state.copyWith(
         isLoading: false,
         categories: l,
+        error: "",
       ));
       add(AddOrderGetProductsLoaded());
     }, (r) {
@@ -73,6 +75,7 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
       emit(state.copyWith(
         isLoading: false,
         products: l,
+        error: "",
       ));
     }, (r) {
       emit(state.copyWith(

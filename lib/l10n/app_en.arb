@@ -1,0 +1,21 @@
+{
+  "addOrderAppbarTitle": "Add Order",
+  "addOrderErrorText": "Could not load data. Please check your internet connection and try again.",
+  "addOrderSelectCustomerFieldLabel": "Select Customer",
+  "addOrderSelectCustomerFieldValidationEmptyError": "Please select a customer.",
+  "addOrderSelectCategoryFieldLabel": "Select Category",
+  "addOrderSelectCategoryFieldValidationEmptyError": "Please select a category.",
+  "addOrderSelectProductFieldLabel": "Select Product",
+  "addOrderSelectProductFieldValidationEmptyError": "Please select a product.",
+  "addOrderSelectQuantityFieldLabel": "Select Quantity",
+  "addOrderSelectQuantityFieldValidationEmptyError": "Please select a quantity.",
+  "addOrderSelectQuantityFieldValidationInvalidError": "Please enter whole number as quantity.",
+  "addOrderAddButtonText": "Add",
+  "addOrderSubButtonText": "Sub",
+  "addOrderRemButtonText": "Rem",
+  "addOrderOrderListTitleRowNameLabel": "Name",
+  "addOrderOrderListTitleRowQtyLabel": "Qty",
+  "addOrderOrderListNoProductsText": "No Products Added.",
+  "addOrderOrderListViewOrderDetailsButton": "View Order Details",
+  "addOrderTapToSign": "Tap to sign"
+}
