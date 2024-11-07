@@ -30,7 +30,6 @@ class AddOrderBloc extends Bloc<AddOrderEvent, AddOrderState> {
 
     final custRes = await _addOrderRepository.getCustomers();
     custRes.fold((l) async {
-      print("c: ${l.first.name}");
       emit(state.copyWith(
         isLoading: false,
         customers: l,

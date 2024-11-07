@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,8 +10,8 @@ part 'add_order_state.freezed.dart';
 
 @freezed
 class AddOrderState with _$AddOrderState {
-  const factory AddOrderState(
-    String error, {
+  const factory AddOrderState({
+    @Default("") String error,
     required bool isLoading,
     @Default([]) List<GetCustomersResult> customers,
     @Default([]) List<GetProductsResult> products,

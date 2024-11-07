@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
+import 'package:order_app_demo/add_order/data/local_data_source/dio_client.dart';
 import 'package:order_app_demo/add_order/data/models/request/get_categories.dart'
     as categories_request;
 import 'package:order_app_demo/add_order/data/models/request/get_customers_request.dart';
@@ -10,18 +12,16 @@ import 'package:order_app_demo/add_order/data/models/request/get_products_reques
 import 'package:order_app_demo/add_order/data/models/response/get_categories_response.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_products_response.dart';
-import 'package:order_app_demo/utils/app_config.dart';
 import 'package:order_app_demo/utils/app_urls.dart';
 
+@lazySingleton
 class AddOrderRemoteDataSource {
-  AddOrderRemoteDataSource() {
-    _dio = Dio(
-      BaseOptions(
-        baseUrl: AppConfig.orderApiUrl,
-      ),
-    );
+  AddOrderRemoteDataSource({required DioClient dioClient}) {
+    _dioClient = dioClient;
+    _dio = _dioClient?.dio;
   }
 
+  DioClient? _dioClient;
   Dio? _dio;
 
   Future<Either<List<GetCustomersResult>, Exception>> getCustomers() async {

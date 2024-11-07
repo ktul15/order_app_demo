@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_customer_response.dart';
 import 'package:order_app_demo/add_order/domain/models/unit.dart';
 import 'package:order_app_demo/utils/app_colors.dart';
@@ -14,8 +15,8 @@ class OrderDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Order Details",
+        title: Text(
+          AppLocalizations.of(context)!.orderDetailsAppBarTitle,
         ),
       ),
       body: SingleChildScrollView(

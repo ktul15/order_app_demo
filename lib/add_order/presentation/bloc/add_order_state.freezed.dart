@@ -180,7 +180,7 @@ class __$$AddOrderStateImplCopyWithImpl<$Res>
     Object? bytes = freezed,
   }) {
     return _then(_$AddOrderStateImpl(
-      null == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
@@ -231,8 +231,9 @@ class __$$AddOrderStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddOrderStateImpl implements _AddOrderState {
-  const _$AddOrderStateImpl(this.error,
-      {required this.isLoading,
+  const _$AddOrderStateImpl(
+      {this.error = "",
+      required this.isLoading,
       final List<GetCustomersResult> customers = const [],
       final List<GetProductsResult> products = const [],
       final List<String> categories = const [],
@@ -248,6 +249,7 @@ class _$AddOrderStateImpl implements _AddOrderState {
         _unitsAdded = unitsAdded;
 
   @override
+  @JsonKey()
   final String error;
   @override
   final bool isLoading;
@@ -355,8 +357,9 @@ class _$AddOrderStateImpl implements _AddOrderState {
 }
 
 abstract class _AddOrderState implements AddOrderState {
-  const factory _AddOrderState(final String error,
-      {required final bool isLoading,
+  const factory _AddOrderState(
+      {final String error,
+      required final bool isLoading,
       final List<GetCustomersResult> customers,
       final List<GetProductsResult> products,
       final List<String> categories,

@@ -17,5 +17,9 @@
   "addOrderOrderListTitleRowQtyLabel": "Qty",
   "addOrderOrderListNoProductsText": "No Products Added.",
   "addOrderOrderListViewOrderDetailsButton": "View Order Details",
-  "addOrderTapToSign": "Tap to sign"
+  "addOrderTapToSign": "Tap to sign",
+
+  "orderDetailsAppBarTitle": "Order Details",
+
+  "signaturePageAppbarTitle": "Add Signature"
 }

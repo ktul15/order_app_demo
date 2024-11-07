@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:order_app_demo/add_order/presentation/bloc/add_order_state.dart';
 
@@ -20,6 +21,8 @@ class SignSection extends StatelessWidget {
     return Container(
       color: Colors.grey.shade400,
       child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 80,
@@ -34,11 +37,12 @@ class SignSection extends StatelessWidget {
                   }
                 });
               },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                 child: Text(
-                  "Tap to sign",
-                  style: TextStyle(fontSize: 18),
+                  AppLocalizations.of(context)!.addOrderTapToSign,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -62,11 +66,11 @@ class SignSection extends StatelessWidget {
                   ? Image.memory(
                       state.bytes!,
                       height: 100,
-                      width: 200,
+                      width: 160,
                     )
                   : Container(
                       height: 100,
-                      width: 200,
+                      width: 160,
                       color: Colors.white,
                     ),
             ),
@@ -76,6 +80,7 @@ class SignSection extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 0.0),
             child: FloatingActionButton(
               backgroundColor: AppColor.primaryColor,
               onPressed: () {},

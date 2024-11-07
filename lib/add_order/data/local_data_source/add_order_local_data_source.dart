@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
 import 'package:order_app_demo/add_order/data/models/response/get_products_response.dart';
 import 'package:order_app_demo/utils/constants.dart';
 import 'package:order_app_demo/utils/database.dart';
@@ -6,6 +7,7 @@ import 'package:order_app_demo/utils/database.dart';
 import '../models/response/get_categories_response.dart';
 import '../models/response/get_customer_response.dart';
 
+@lazySingleton
 class AddOrderLocalDataSource {
   AddOrderLocalDataSource();
 
